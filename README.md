@@ -1,6 +1,6 @@
-# pengenalan_plat_nomor_otomatis
+## pengenalan_plat_nomor_otomatis
  pengenalan plat nomor otomatis dengan python 3.7.5 dan OpenCv 4
-# requirements
+## requirements
 1. Install Python 3.7.5
 2. Install OpenCv-Python (perintahnya "PIP install opencv-python")
 3. Buat Python Environment
