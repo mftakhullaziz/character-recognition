@@ -8,7 +8,7 @@ RESIZED_IMAGE_WIDTH = 20
 RESIZED_IMAGE_HEIGHT = 30
 
 def main():
-    imgTrainingNumbers = cv2.imread("Citra_Plate_Training/karakter_plat_indonesia.jpg")
+    imgTrainingNumbers = cv2.imread("Citra_Plate_Training/training_0.jpg")
 
     scale_percent = 80  # percent of original size
     width = int(imgTrainingNumbers.shape[1] * scale_percent / 100)
