@@ -2,12 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="024ec4bd-c089-482b-af3d-9c19f072c8a3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Automatic_Number_Plate_Recognition_PCD.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Automatic_Number_Plate_Recognition_PCD.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Miftakhul_Aziz.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Classifications.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Flattened_Images.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Knn_Klasifikasi/Generate_Data_Pengenalan_Citra_Plat.py" beforeDir="false" afterPath="$PROJECT_DIR$/Knn_Klasifikasi/Generate_Data_Pengenalan_Citra_Plat.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Knn_Klasifikasi/Knn_Training_dan_Testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Knn_Klasifikasi/Knn_Training_dan_Testing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Deteksi_Karakter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Deteksi_Karakter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Deteksi_Plat.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Deteksi_Plat.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Main_Deteksi_Plate.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Main_Deteksi_Plate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Possible_Karakter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Possible_Karakter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Possible_Plat.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Possible_Plat.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Preprocessing_Citra.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Preprocessing_Citra.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,15 +27,17 @@
   <component name="ProjectId" id="1UMqK2ynACuyUBi7mjj79wcMztJ" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Knn_Klasifikasi/Citra_Plate_Training" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Miftakhul Aziz\PycharmProjects\Automatic_Number_Plate_Recognition_PCD\pengenalan_plat_nomor_otomatis\Kode_Sumber_Deteksi_Plate" />
       <recent name="C:\Users\Miftakhul Aziz\PycharmProjects\Automatic_Number_Plate_Recognition_PCD\Knn_Klasifikasi\Citra_Plate_Training" />
       <recent name="C:\Users\Miftakhul Aziz\PycharmProjects\Automatic_Number_Plate_Recognition_PCD\Knn_Klasifikasi" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Miftakhul Aziz\PycharmProjects\Automatic_Number_Plate_Recognition_PCD\pengenalan_plat_nomor_otomatis\Kode_Sumber_Deteksi_Plate" />
       <recent name="C:\Users\Miftakhul Aziz\PycharmProjects\Automatic_Number_Plate_Recognition_PCD\Knn_Klasifikasi\Citra_Plate_Training" />
       <recent name="C:\Users\Miftakhul Aziz\PycharmProjects\Automatic_Number_Plate_Recognition_PCD\Knn_Klasifikasi" />
     </key>
@@ -46,8 +54,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Knn_Training_dan_Testing">
-    <configuration name="GenData" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.Main_Deteksi_Plate">
+    <configuration name="Deteksi_Karakter" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Automatic_Number_Plate_Recognition_PCD" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -55,11 +63,32 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Knn_Klasifikasi" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Knn_Klasifikasi/GenData.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Deteksi_Karakter.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Deteksi_Plat" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Automatic_Number_Plate_Recognition_PCD" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Deteksi_Plat.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -89,27 +118,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Knn_Pengenalan_Karakter_Citra" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Automatic_Number_Plate_Recognition_PCD" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Knn_Klasifikasi" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Knn_Klasifikasi/Knn_Pengenalan_Karakter_Citra.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="Knn_Training_dan_Testing" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Automatic_Number_Plate_Recognition_PCD" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -131,12 +139,34 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Main_Deteksi_Plate" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Automatic_Number_Plate_Recognition_PCD" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Main_Deteksi_Plate.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Main_Deteksi_Plate" />
         <item itemvalue="Python.Knn_Training_dan_Testing" />
+        <item itemvalue="Python.Deteksi_Plat" />
+        <item itemvalue="Python.Deteksi_Karakter" />
         <item itemvalue="Python.Generate_Data_Pengenalan_Citra_Plat" />
-        <item itemvalue="Python.GenData" />
-        <item itemvalue="Python.Knn_Pengenalan_Karakter_Citra" />
       </list>
     </recent_temporary>
   </component>
@@ -151,6 +181,14 @@
       <option name="presentableId" value="Default" />
       <updated>1575176744159</updated>
     </task>
+    <task id="LOCAL-00001" summary="Update data klasifikasi.txt">
+      <created>1575358743164</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1575358743165</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -158,10 +196,16 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update data klasifikasi.txt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update data klasifikasi.txt" />
   </component>
 </project>

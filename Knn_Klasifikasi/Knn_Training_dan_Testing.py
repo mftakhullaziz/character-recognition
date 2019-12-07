@@ -9,8 +9,7 @@ MIN_CONTOUR_AREA = 100
 RESIZED_IMAGE_WIDTH = 20
 RESIZED_IMAGE_HEIGHT = 30
 
-class ContourWithData():
-
+class ContourWithData:
     npaContour = None
     boundingRect = None
     intRectX = 0
@@ -37,16 +36,16 @@ def main():
 
     try:
         npaClassifications = np.loadtxt("Classifications.txt", np.float32)
-    except:
-        print ("Gagal membuka file Classifications.txt, Close Program\n")
+    except():
+        print("Gagal membuka file Classifications.txt, Close Program\n")
         os.system("pause")
         return
     # end try
 
     try:
         npaFlattenedImages = np.loadtxt("Flattened_Images.txt", np.float32)
-    except:
-        print ("Gagal membuka file Flattened_Images.txt, Close Program\n")
+    except():
+        print("Gagal membuka file Flattened_Images.txt, Close Program\n")
         os.system("pause")
         return
     # end try
@@ -57,7 +56,7 @@ def main():
 
     kNearest.train(npaFlattenedImages, cv2.ml.ROW_SAMPLE, npaClassifications)
 
-    imgTestingNumbers = cv2.imread("Citra_Plate_Training/test_5.jpg")
+    imgTestingNumbers = cv2.imread("Citra_Plate_Training/indo.png")
 
     if imgTestingNumbers is None:
         print("Gagal mengimport file citra \n\n")
@@ -66,8 +65,7 @@ def main():
     # end if
 
     imgGray = cv2.cvtColor(imgTestingNumbers, cv2.COLOR_BGR2GRAY)
-    imgBlurred = cv2.GaussianBlur(imgGray, (5,5), 0)
-
+    imgBlurred = cv2.GaussianBlur(imgGray, (5, 5), 0)
 
     imgThresh = cv2.adaptiveThreshold(imgBlurred,
                                       255,
@@ -97,20 +95,20 @@ def main():
         # end if
     # end for
 
-    validContoursWithData.sort(key = operator.attrgetter("intRectX"))
+    validContoursWithData.sort(key=operator.attrgetter("intRectX"))
 
     strFinalString = ""
 
     for contourWithData in validContoursWithData:
-
         cv2.rectangle(imgTestingNumbers,
                       (contourWithData.intRectX, contourWithData.intRectY),
-                      (contourWithData.intRectX + contourWithData.intRectWidth, contourWithData.intRectY + contourWithData.intRectHeight),      # lower right corner
+                      (contourWithData.intRectX + contourWithData.intRectWidth,
+                       contourWithData.intRectY + contourWithData.intRectHeight),  # lower right corner
                       (0, 255, 0),
                       2)
 
-        imgROI = imgThresh[contourWithData.intRectY : contourWithData.intRectY + contourWithData.intRectHeight,
-                           contourWithData.intRectX : contourWithData.intRectX + contourWithData.intRectWidth]
+        imgROI = imgThresh[contourWithData.intRectY: contourWithData.intRectY + contourWithData.intRectHeight,
+                 contourWithData.intRectX: contourWithData.intRectX + contourWithData.intRectWidth]
 
         imgROIResized = cv2.resize(imgROI, (RESIZED_IMAGE_WIDTH, RESIZED_IMAGE_HEIGHT))
 
@@ -118,14 +116,14 @@ def main():
 
         npaROIResized = np.float32(npaROIResized)
 
-        retval, npaResults, neigh_resp, dists = kNearest.findNearest(npaROIResized, k = 1)
+        retval, npaResults, neigh_resp, dists = kNearest.findNearest(npaROIResized, k=1)
 
         strCurrentChar = str(chr(int(npaResults[0][0])))
 
         strFinalString = strFinalString + strCurrentChar
     # end for
 
-    print("\n" + "Karakter yang di Kenali Adalah : "+ strFinalString + "\n")
+    print("\n" + "Karakter yang di Kenali Adalah : " + strFinalString + "\n")
 
     cv2.imshow("Citra Test", imgTestingNumbers)
     cv2.waitKey(0)
@@ -133,15 +131,7 @@ def main():
 
     return
 
+
 if __name__ == "__main__":
     main()
 # end if
-
-
-
-
-
-
-
-
-

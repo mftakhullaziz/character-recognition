@@ -10,13 +10,13 @@ RESIZED_IMAGE_HEIGHT = 30
 def main():
     imgTrainingNumbers = cv2.imread("Citra_Plate_Training/training_0.jpg")
 
-    scale_percent = 80  # percent of original size
+    # Resize Citra menjadi skala 80%
+    scale_percent = 80
     width = int(imgTrainingNumbers.shape[1] * scale_percent / 100)
     height = int(imgTrainingNumbers.shape[0] * scale_percent / 100)
     dimensi = (width, height)
-    # resize image
+    # Citra Setelah di Resize
     imgTrainingResize = cv2.resize(imgTrainingNumbers, dimensi, interpolation=cv2.INTER_AREA)
-
 
     if imgTrainingNumbers is None:
         print("error: image not read from file \n\n")
@@ -33,7 +33,6 @@ def main():
 
     imgThreshCopy = imgThresh.copy()
 
-    # imgContours, \
     npaContours, npaHierarchy = cv2.findContours(imgThreshCopy, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     npaFlattenedImages = np.empty((0, RESIZED_IMAGE_WIDTH * RESIZED_IMAGE_HEIGHT))
@@ -76,7 +75,7 @@ def main():
         # end if
     # end for
 
-    fltClassifications = np.array(intClassifications,np.float32)
+    fltClassifications = np.array(intClassifications, np.float32)
     npaClassifications = fltClassifications.reshape((fltClassifications.size, 1))
 
     print("\n\ntraining selesai !!\n")
