@@ -56,7 +56,7 @@ def main():
 
     kNearest.train(npaFlattenedImages, cv2.ml.ROW_SAMPLE, npaClassifications)
 
-    imgTestingNumbers = cv2.imread("Citra_Plate_Training/indo.png")
+    imgTestingNumbers = cv2.imread("Citra_Plate_Training/test_5.jpg")
 
     if imgTestingNumbers is None:
         print("Gagal mengimport file citra \n\n")

@@ -1,18 +1,15 @@
 # PossibleChar.py
 
 import cv2
-import numpy as np
 import math
 
-###################################################################################################
+# Class mendeteksi kemungkinan Karakter yang dapat di kenali
 class PossibleChar:
 
-    # constructor #################################################################################
+    # constructor
     def __init__(self, _contour):
         self.contour = _contour
-
         self.boundingRect = cv2.boundingRect(self.contour)
-
         [intX, intY, intWidth, intHeight] = self.boundingRect
 
         self.intBoundingRectX = intX
@@ -31,11 +28,3 @@ class PossibleChar:
     # end constructor
 
 # end class
-
-
-
-
-
-
-
-

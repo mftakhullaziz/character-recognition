@@ -9,11 +9,10 @@ from Kode_Sumber_Deteksi_Plate import Main_Deteksi_Plate
 from Kode_Sumber_Deteksi_Plate import Preprocessing_Citra
 from Kode_Sumber_Deteksi_Plate import Possible_Karakter
 
-# module level variables ##########################################################################
 
 kNearest = cv2.ml.KNearest_create()
 
-        # constants for checkIfPossibleChar, this checks one possible char only (does not compare to another char)
+# Konstanta untuk checkIfPossibleChar, ini digunkan untuk menidentifikasi satu Possible (Kemungkinan) Karakter
 MIN_PIXEL_WIDTH = 2
 MIN_PIXEL_HEIGHT = 8
 
@@ -22,7 +21,7 @@ MAX_ASPECT_RATIO = 1.0
 
 MIN_PIXEL_AREA = 90
 
-        # constants for comparing two chars
+# Konstanta untuk membandingkar 2 kemungkinan karakter
 MIN_DIAG_SIZE_MULTIPLE_AWAY = 0.3
 MAX_DIAG_SIZE_MULTIPLE_AWAY = 5.0
 
@@ -33,7 +32,7 @@ MAX_CHANGE_IN_HEIGHT = 0.2
 
 MAX_ANGLE_BETWEEN_CHARS = 12.0
 
-        # other constants
+# Konstanta lainnya
 MIN_NUMBER_OF_MATCHING_CHARS = 3
 
 RESIZED_CHAR_IMAGE_WIDTH = 20
@@ -41,76 +40,75 @@ RESIZED_CHAR_IMAGE_HEIGHT = 30
 
 MIN_CONTOUR_AREA = 100
 
-###################################################################################################
 def loadKNNDataAndTrainKNN():
-    allContoursWithData = []                # declare empty lists,
-    validContoursWithData = []              # we will fill these shortly
+    allContoursWithData = []                # deklarasi empty lists,
+    validContoursWithData = []              # digunakan untuk mengisi list data
 
     try:
-        npaClassifications = np.loadtxt("Classifications.txt", np.float32)                  # read in training classifications
-    except:                                                                                 # if file could not be opened
-        print("error, unable to open classifications.txt, exiting program\n")  # show error message
+        npaClassifications = np.loadtxt("Classifications.txt", np.float32)                  # Membaca data training classifications.txt dari proses pengenalan karakter
+    except:
+        print("error, Gagal load file classifications.txt\n")                               # Pesan error
         os.system("pause")
-        return False                                                                        # and return False
+        return False                                                                        # Akan mengembalikan nilai 0
     # end try
 
     try:
-        npaFlattenedImages = np.loadtxt("Flattened_Images.txt", np.float32)                 # read in training images
-    except:                                                                                 # if file could not be opened
-        print("error, unable to open flattened_images.txt, exiting program\n")  # show error message
+        npaFlattenedImages = np.loadtxt("Flattened_Images.txt", np.float32)                 # Membaca data training Citra dari proses pengenalan karakter
+    except:
+        print("error, unable to open flattened_images.txt, exiting program\n")              # pesan error
         os.system("pause")
-        return False                                                                        # and return False
+        return False                                                                        # Akan mengembalikan nilai 0
     # end try
 
-    npaClassifications = npaClassifications.reshape((npaClassifications.size, 1))       # reshape numpy array to 1d, necessary to pass to call to train
+    npaClassifications = npaClassifications.reshape((npaClassifications.size, 1))            # reshape ke numpy array 1d
 
-    kNearest.setDefaultK(1)                                                             # set default K to 1
+    kNearest.setDefaultK(1)                                                                  # setting default K to 1
 
-    kNearest.train(npaFlattenedImages, cv2.ml.ROW_SAMPLE, npaClassifications)           # train KNN object
+    kNearest.train(npaFlattenedImages, cv2.ml.ROW_SAMPLE, npaClassifications)                # pelatihan KNN
 
-    return True                             # if we got here training was successful so return true
+    return True                                                                              # jika proses pelatihan berhasil akan mengembalikan nilai true
 # end function
 
-###################################################################################################
 def detectCharsInPlates(listOfPossiblePlates):
+    global height, width
     intPlateCounter = 0
     imgContours = None
     contours = []
 
-    if len(listOfPossiblePlates) == 0:          # if list of possible plates is empty
-        return listOfPossiblePlates             # return
+    if len(listOfPossiblePlates) == 0:          # Kondisi ketika kemungkinan plat yang terdeteksi adalah null
+        return listOfPossiblePlates             # maka akan mengembalikan listOfPossiblePlates
     # end if
 
-            # at this point we can be sure the list of possible plates has at least one plate
+    # Pada proses dibawah ini akan memastikan kemungkinan plat yang dapat terdeteksi setidaknya satu plat
 
-    for possiblePlate in listOfPossiblePlates:          # for each possible plate, this is a big for loop that takes up most of the function
+    for possiblePlate in listOfPossiblePlates:          # looping untuk setiap kemungkinan plat
 
-        possiblePlate.imgGrayscale, possiblePlate.imgThresh = Preprocessing_Citra.preprocess(possiblePlate.imgPlate)     # preprocess to get grayscale and threshold images
+        possiblePlate.imgGrayscale, possiblePlate.imgThresh = Preprocessing_Citra.preprocess(possiblePlate.imgPlate)     # preprocessing untuk grayscale dan threshold
 
-        if Main_Deteksi_Plate.showSteps == True: # show steps ###################################################
+        if Main_Deteksi_Plate.showSteps:
             cv2.imshow("5a", possiblePlate.imgPlate)
             cv2.imshow("5b", possiblePlate.imgGrayscale)
             cv2.imshow("5c", possiblePlate.imgThresh)
-        # end if # show steps #####################################################################
+        # end if
 
-                # increase size of plate image for easier viewing and char detection
+        # resize plat untuk memudahkan proses threshold
         possiblePlate.imgThresh = cv2.resize(possiblePlate.imgThresh, (0, 0), fx = 1.6, fy = 1.6)
 
-                # threshold again to eliminate any gray areas
+        # threshold lagi untuk menghilangkan area gray
         thresholdValue, possiblePlate.imgThresh = cv2.threshold(possiblePlate.imgThresh, 0.0, 255.0, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
 
-        if Main_Deteksi_Plate.showSteps == True: # show steps ###################################################
+        if Main_Deteksi_Plate.showSteps:
             cv2.imshow("5d", possiblePlate.imgThresh)
-        # end if # show steps #####################################################################
+        # end if #
 
-                # find all possible chars in the plate,
-                # this function first finds all contours, then only includes contours that could be chars (without comparison to other chars yet)
+        # mencari semua kemungkinan karakter yang terdapat pada plat
+        # fungsi ini pertama-tama digunakan untuk menemukan semua kontur, tetapi hanya mencakup kontur yang mungkin bisa menjadi karakter (belum dibandingkan dengan karakter lain)
         listOfPossibleCharsInPlate = findPossibleCharsInPlate(possiblePlate.imgGrayscale, possiblePlate.imgThresh)
 
-        if Main_Deteksi_Plate.showSteps == True: # show steps ###################################################
+        if Main_Deteksi_Plate.showSteps:
             height, width, numChannels = possiblePlate.imgPlate.shape
             imgContours = np.zeros((height, width, 3), np.uint8)
-            del contours[:]                                         # clear the contours list
+            del contours[:]                                         # hapus list contour
 
             for possibleChar in listOfPossibleCharsInPlate:
                 contours.append(possibleChar.contour)
@@ -119,12 +117,12 @@ def detectCharsInPlates(listOfPossiblePlates):
             cv2.drawContours(imgContours, contours, -1, Main_Deteksi_Plate.SCALAR_WHITE)
 
             cv2.imshow("6", imgContours)
-        # end if # show steps #####################################################################
+        # end if
 
-                # given a list of all possible chars, find groups of matching chars within the plate
+        # mengidentifikasi daftar semua karakter yang mungkin, lalu menemukan karakter yang cocok di dalam plat
         listOfListsOfMatchingCharsInPlate = findListOfListsOfMatchingChars(listOfPossibleCharsInPlate)
 
-        if Main_Deteksi_Plate.showSteps == True: # show steps ###################################################
+        if Main_Deteksi_Plate.showSteps:
             imgContours = np.zeros((height, width, 3), np.uint8)
             del contours[:]
 
@@ -139,11 +137,11 @@ def detectCharsInPlates(listOfPossiblePlates):
                 cv2.drawContours(imgContours, contours, -1, (intRandomBlue, intRandomGreen, intRandomRed))
             # end for
             cv2.imshow("7", imgContours)
-        # end if # show steps #####################################################################
+        # end if
 
-        if (len(listOfListsOfMatchingCharsInPlate) == 0):			# if no groups of matching chars were found in the plate
+        if len(listOfListsOfMatchingCharsInPlate) == 0:			# Kondisi ketika tidak ada karakter yang cocok dan ditemukan pada plat
 
-            if Main_Deteksi_Plate.showSteps == True: # show steps ###############################################
+            if Main_Deteksi_Plate.showSteps:
                 print("chars found in plate number " + str(
                     intPlateCounter) + " = (none), click on any image and press a key to continue . . .")
                 intPlateCounter = intPlateCounter + 1
@@ -151,18 +149,18 @@ def detectCharsInPlates(listOfPossiblePlates):
                 cv2.destroyWindow("9")
                 cv2.destroyWindow("10")
                 cv2.waitKey(0)
-            # end if # show steps #################################################################
+            # end if
 
             possiblePlate.strChars = ""
-            continue						# go back to top of for loop
+            continue						# kembali ke awal lagi dari for loop
         # end if
 
-        for i in range(0, len(listOfListsOfMatchingCharsInPlate)):                              # within each list of matching chars
-            listOfListsOfMatchingCharsInPlate[i].sort(key = lambda matchingChar: matchingChar.intCenterX)        # sort chars from left to right
-            listOfListsOfMatchingCharsInPlate[i] = removeInnerOverlappingChars(listOfListsOfMatchingCharsInPlate[i])              # and remove inner overlapping chars
+        for i in range(0, len(listOfListsOfMatchingCharsInPlate)):                                                      # mencocokan setiap kemungkinan daftar karakter yang cocok
+            listOfListsOfMatchingCharsInPlate[i].sort(key = lambda matchingChar: matchingChar.intCenterX)               # mengurutkan karakter yang telah terdeteksi dari kiri kekanan
+            listOfListsOfMatchingCharsInPlate[i] = removeInnerOverlappingChars(listOfListsOfMatchingCharsInPlate[i])    # dan menghapus karakter yang tumpang tindih (dan tidak jelas)
         # end for
 
-        if Main_Deteksi_Plate.showSteps == True: # show steps ###################################################
+        if Main_Deteksi_Plate.showSteps:
             imgContours = np.zeros((height, width, 3), np.uint8)
 
             for listOfMatchingChars in listOfListsOfMatchingCharsInPlate:
@@ -179,13 +177,13 @@ def detectCharsInPlates(listOfPossiblePlates):
                 cv2.drawContours(imgContours, contours, -1, (intRandomBlue, intRandomGreen, intRandomRed))
             # end for
             cv2.imshow("8", imgContours)
-        # end if # show steps #####################################################################
+        # end if #
 
-                # within each possible plate, suppose the longest list of potential matching chars is the actual list of chars
+        # dari semua kemungkinan plat, anggaplah plat yang memiliki karakter panjang itu yang sebenarnya
         intLenOfLongestListOfChars = 0
         intIndexOfLongestListOfChars = 0
 
-                # loop through all the vectors of matching chars, get the index of the one with the most chars
+        # loop melalui semua vektor karakter yang cocok, dapatkan indeks yang memiliki karakter paling banyak
         for i in range(0, len(listOfListsOfMatchingCharsInPlate)):
             if len(listOfListsOfMatchingCharsInPlate[i]) > intLenOfLongestListOfChars:
                 intLenOfLongestListOfChars = len(listOfListsOfMatchingCharsInPlate[i])
@@ -193,10 +191,10 @@ def detectCharsInPlates(listOfPossiblePlates):
             # end if
         # end for
 
-                # suppose that the longest list of matching chars within the plate is the actual list of chars
+        # asumsikan bahwa daftar karakter yang paling panjang di dalam plat adalah daftar karakter yang sebenarnya
         longestListOfMatchingCharsInPlate = listOfListsOfMatchingCharsInPlate[intIndexOfLongestListOfChars]
 
-        if Main_Deteksi_Plate.showSteps == True: # show steps ###################################################
+        if Main_Deteksi_Plate.showSteps:
             imgContours = np.zeros((height, width, 3), np.uint8)
             del contours[:]
 
@@ -207,20 +205,20 @@ def detectCharsInPlates(listOfPossiblePlates):
             cv2.drawContours(imgContours, contours, -1, Main_Deteksi_Plate.SCALAR_WHITE)
 
             cv2.imshow("9", imgContours)
-        # end if # show steps #####################################################################
+        # end if
 
         possiblePlate.strChars = recognizeCharsInPlate(possiblePlate.imgThresh, longestListOfMatchingCharsInPlate)
 
-        if Main_Deteksi_Plate.showSteps == True: # show steps ###################################################
+        if Main_Deteksi_Plate.showSteps:
             print("chars found in plate number " + str(
                 intPlateCounter) + " = " + possiblePlate.strChars + ", click on any image and press a key to continue . . .")
             intPlateCounter = intPlateCounter + 1
             cv2.waitKey(0)
-        # end if # show steps #####################################################################
+        # end if
 
     # end of big for loop that takes up most of the function
 
-    if Main_Deteksi_Plate.showSteps == True:
+    if Main_Deteksi_Plate.showSteps:
         print("\nchar detection complete, click on any image and press a key to continue . . .\n")
         cv2.waitKey(0)
     # end if
@@ -228,7 +226,6 @@ def detectCharsInPlates(listOfPossiblePlates):
     return listOfPossiblePlates
 # end function
 
-###################################################################################################
 def findPossibleCharsInPlate(imgGrayscale, imgThresh):
     listOfPossibleChars = []                        # this will be the return value
     contours = []
@@ -429,9 +426,9 @@ def recognizeCharsInPlate(imgThresh, listOfMatchingChars):
 
     # end for
 
-    if Main_Deteksi_Plate.showSteps == True: # show steps #######################################################
+    if Main_Deteksi_Plate.showSteps:
         cv2.imshow("10", imgThreshColor)
-    # end if # show steps #########################################################################
+    # end if
 
     return strChars
 # end function

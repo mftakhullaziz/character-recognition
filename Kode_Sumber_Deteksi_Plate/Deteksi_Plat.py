@@ -11,13 +11,12 @@ from Kode_Sumber_Deteksi_Plate import Deteksi_Karakter
 from Kode_Sumber_Deteksi_Plate import Possible_Plat
 from Kode_Sumber_Deteksi_Plate import Possible_Karakter
 
-# module level variables ##########################################################################
-PLATE_WIDTH_PADDING_FACTOR = 1.3
+# Inisiasi padding pada Cropping Plat nomor
+PLATE_WIDTH_PADDING_FACTOR = 1.1
 PLATE_HEIGHT_PADDING_FACTOR = 1.5
 
-###################################################################################################
 def detectPlatesInScene(imgOriginalScene):
-    listOfPossiblePlates = []                   # this will be the return value
+    listOfPossiblePlates = []                   # Return dari value
 
     height, width, numChannels = imgOriginalScene.shape
 
@@ -27,15 +26,15 @@ def detectPlatesInScene(imgOriginalScene):
 
     cv2.destroyAllWindows()
 
-    if Main_Deteksi_Plate.showSteps == True: # show steps #######################################################
+    if Main_Deteksi_Plate.showSteps == True:  # show steps
         cv2.imshow("0", imgOriginalScene)
-    # end if # show steps #########################################################################
+    # end if
 
     imgGrayscaleScene, imgThreshScene = Preprocessing_Citra.preprocess(imgOriginalScene)         # preprocess to get grayscale and threshold images
 
-    if Main_Deteksi_Plate.showSteps == True: # show steps #######################################################
-        cv2.imshow("1a", imgGrayscaleScene)
-        cv2.imshow("1b", imgThreshScene)
+    if Main_Deteksi_Plate.showSteps == True:  #.showSteps == True: show steps #######################################################
+        cv2.imshow("Konversi Ke GrayScale", imgGrayscaleScene)
+        cv2.imshow("Threshold", imgThreshScene)
     # end if # show steps #########################################################################
 
             # find all possible chars in the scene,

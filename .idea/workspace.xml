@@ -2,18 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="024ec4bd-c089-482b-af3d-9c19f072c8a3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Miftakhul_Aziz.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Classifications.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Flattened_Images.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Miftakhul_Aziz.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Miftakhul_Aziz.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Knn_Klasifikasi/Generate_Data_Pengenalan_Citra_Plat.py" beforeDir="false" afterPath="$PROJECT_DIR$/Knn_Klasifikasi/Generate_Data_Pengenalan_Citra_Plat.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Knn_Klasifikasi/Knn_Training_dan_Testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Knn_Klasifikasi/Knn_Training_dan_Testing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Citra_Plate/10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Citra_Plate/19.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Citra_Plate/20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Citra_Plate/21.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Citra_Plate/22.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Citra_Plate/24.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Citra_Plate/a.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Citra_Plate/aneh.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Citra_Plate/plat1.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Citra_Plate/plat2.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Citra_Plate/plat4.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Deteksi_Karakter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Deteksi_Karakter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Deteksi_Plat.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Deteksi_Plat.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Main_Deteksi_Plate.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Main_Deteksi_Plate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Possible_Karakter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Possible_Karakter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Possible_Plat.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Possible_Plat.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Preprocessing_Citra.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Preprocessing_Citra.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/imgOriginalScene.png" beforeDir="false" afterPath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/imgOriginalScene.png" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,6 +37,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -188,7 +198,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575358743165</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Update penyesuaian treshold">
+      <created>1575722923148</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1575722923149</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -206,6 +223,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update data klasifikasi.txt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update data klasifikasi.txt" />
+    <MESSAGE value="Update penyesuaian treshold" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update penyesuaian treshold" />
   </component>
 </project>
