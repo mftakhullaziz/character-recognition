@@ -12,7 +12,7 @@ from Kode_Sumber_Deteksi_Plate import Possible_Plat
 from Kode_Sumber_Deteksi_Plate import Possible_Karakter
 
 # Inisiasi padding pada Cropping Plat nomor
-PLATE_WIDTH_PADDING_FACTOR = 1.1
+PLATE_WIDTH_PADDING_FACTOR = 1.7
 PLATE_HEIGHT_PADDING_FACTOR = 1.5
 
 def detectPlatesInScene(imgOriginalScene):
