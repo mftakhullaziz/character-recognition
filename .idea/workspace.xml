@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="024ec4bd-c089-482b-af3d-9c19f072c8a3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Citra_Hasil/citra_hasil_30.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Citra_Hasil/citra_hasil_30.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Main_Deteksi_Plate.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Main_Deteksi_Plate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Preprocessing_Citra.py" beforeDir="false" afterPath="$PROJECT_DIR$/Kode_Sumber_Deteksi_Plate/Preprocessing_Citra.py" afterDir="false" />
-    </list>
+    <list default="true" id="024ec4bd-c089-482b-af3d-9c19f072c8a3" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,7 +204,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575963564399</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Update Fix Done">
+      <created>1575964354479</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1575964354479</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -231,6 +233,7 @@
     <MESSAGE value="Update cleaning code" />
     <MESSAGE value="Update cleaning code terbaru dan done semua issues" />
     <MESSAGE value="Update done 30 data testing citra plat" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update done 30 data testing citra plat" />
+    <MESSAGE value="Update Fix Done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Fix Done" />
   </component>
 </project>
