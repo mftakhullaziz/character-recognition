@@ -50,7 +50,7 @@ def main():
         return  # Program akan otomatis berhenti
     # end if
 
-    imgOriginalS: None = cv2.imread("Sample_Plat/9.jpeg")  # Proses membaca Citra dari folder Sample_Plat
+    imgOriginalS: None = cv2.imread("Sample_Plat/7.jpeg")  # Proses membaca Citra dari folder Sample_Plat
 
     # Resize Citra menjadi skala 80%
     scale_percent = 80
@@ -105,7 +105,7 @@ def main():
         cv2.imshow("Citra Plat Hasil", imgOriginalScene)
 
         # Menyimpan Citra Hasil kedalam file berekstensi.jpeg
-        cv2.imwrite("citra_hasil_1.jpeg", imgOriginalScene)
+        cv2.imwrite("Citra_Hasil/citra_hasil_7.jpeg", imgOriginalScene)
 
     # end if else
 

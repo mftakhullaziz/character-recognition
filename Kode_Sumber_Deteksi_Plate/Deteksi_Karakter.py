@@ -210,16 +210,17 @@ def detectCharsInPlates(listOfPossiblePlates):
         possiblePlate.strChars = recognizeCharsInPlate(possiblePlate.imgThresh, longestListOfMatchingCharsInPlate)
 
         if Main_Deteksi_Plate.showSteps:
-            print("chars found in plate number " + str(
+            print("Karakter ditemukan dalam plat " + str(
                 intPlateCounter) + " = " + possiblePlate.strChars + ", click on any image and press a key to continue . . .")
             intPlateCounter = intPlateCounter + 1
             cv2.waitKey(0)
         # end if
 
-    # end of big for loop that takes up most of the function
+    # end of
+    # akhir dari looping yang menggunakan beberapa fungsu
 
     if Main_Deteksi_Plate.showSteps:
-        print("\nchar detection complete, click on any image and press a key to continue . . .\n")
+        print("\nPendeteksian Karakter Selesai, Klik image atau press a key untuk continue . . .\n")
         cv2.waitKey(0)
     # end if
 
@@ -227,88 +228,88 @@ def detectCharsInPlates(listOfPossiblePlates):
 # end function
 
 def findPossibleCharsInPlate(imgGrayscale, imgThresh):
-    listOfPossibleChars = []                        # this will be the return value
+    listOfPossibleChars = []                        # mengembalikan nilai dari value
     contours = []
     imgThreshCopy = imgThresh.copy()
 
-            # find all contours in plate
-    # imgContours, contours, npaHierarchy = cv2.findContours(imgThreshCopy, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+
+    # Jika menggunakan OpenCv 3 -> # imgContours, contours, npaHierarchy = cv2.findContours(imgThreshCopy, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+    # Mencari semua kontur pada plat
     contours, npaHierarchy = cv2.findContours(imgThreshCopy, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-    for contour in contours:                        # for each contour
+    for contour in contours:                               # for each contour
         possibleChar = Possible_Karakter.PossibleChar(contour)
 
-        if checkIfPossibleChar(possibleChar):              # if contour is a possible char, note this does not compare to other chars (yet) . . .
-            listOfPossibleChars.append(possibleChar)       # add to list of possible chars
+        if checkIfPossibleChar(possibleChar):              # Jika pada kontur terdapat kemungkinan karakter, perhatikan jangan bandingkan dengan karakter lain
+            listOfPossibleChars.append(possibleChar)       # Maka tambahkan ke List kemungkinan karakter
         # end if
     # end if
 
     return listOfPossibleChars
 # end function
 
-###################################################################################################
+
 def checkIfPossibleChar(possibleChar):
-            # this function is a 'first pass' that does a rough check on a contour to see if it could be a char,
-            # note that we are not (yet) comparing the char to other chars to look for a group
+    # fungsi ini adalah 'operan pertama' yang melakukan pengecekan kasar pada kontur untuk melihat apakah itu bisa menjadi char, perhatikan bahwa kita belum membandingkan karakter dengan karakter lain
     if (possibleChar.intBoundingRectArea > MIN_PIXEL_AREA and
         possibleChar.intBoundingRectWidth > MIN_PIXEL_WIDTH and possibleChar.intBoundingRectHeight > MIN_PIXEL_HEIGHT and
-        MIN_ASPECT_RATIO < possibleChar.fltAspectRatio and possibleChar.fltAspectRatio < MAX_ASPECT_RATIO):
+            MIN_ASPECT_RATIO < possibleChar.fltAspectRatio < MAX_ASPECT_RATIO):
         return True
     else:
         return False
     # end if
 # end function
 
-###################################################################################################
 def findListOfListsOfMatchingChars(listOfPossibleChars):
-            # with this function, we start off with all the possible chars in one big list
-            # the purpose of this function is to re-arrange the one big list of chars into a list of lists of matching chars,
-            # note that chars that are not found to be in a group of matches do not need to be considered further
-    listOfListsOfMatchingChars = []                  # this will be the return value
+    # dengan fungsi ini, kita mulai dengan semua karakter yang mungkin ada dalam satu list besar
+    # Tujuan dari fungsi ini adalah untuk mengatur kembali satu karakter list besar ke dalam karakter list-list yang cocok,
+    # perhatikan bahwa karakter yang tidak ditemukan dalam plat maka pencocokan tidak perlu dipertimbangkan lebih lanjut
+    listOfListsOfMatchingChars = []                  # mengembalikan nilai value
 
-    for possibleChar in listOfPossibleChars:                        # for each possible char in the one big list of chars
-        listOfMatchingChars = findListOfMatchingChars(possibleChar, listOfPossibleChars)        # find all chars in the big list that match the current char
+    for possibleChar in listOfPossibleChars:                        # for each possible char pada satu list besar dari karakter
+        listOfMatchingChars = findListOfMatchingChars(possibleChar, listOfPossibleChars)        # mencari semua karakter pada list besar dan mencocokan pada karakter sebelumnya
 
-        listOfMatchingChars.append(possibleChar)                # also add the current char to current possible list of matching chars
+        listOfMatchingChars.append(possibleChar)                # tambahkan juga karakter saat ini ke list kemungkinan karakter yang cocok saat ini
 
-        if len(listOfMatchingChars) < MIN_NUMBER_OF_MATCHING_CHARS:     # if current possible list of matching chars is not long enough to constitute a possible plate
-            continue                            # jump back to the top of the for loop and try again with next char, note that it's not necessary
-                                                # to save the list in any way since it did not have enough chars to be a possible plate
+        if len(listOfMatchingChars) < MIN_NUMBER_OF_MATCHING_CHARS:     # kondisi jika list karakter yang sesuai saat ini tidak cukup panjang untuk membentuk kemungkinan plat
+            continue                                                    # kembali ke atas untuk for loop dan coba lagi dengan char berikutnya, perhatikan bahwa itu tidak perlu
+                                                                        # untuk menyimpan list dengan cara apa pun karena
+                                                                        # tidak memiliki karakter yang cukup untuk dijadikan kemungkinan plat
         # end if
 
-                                                # if we get here, the current list passed test as a "group" or "cluster" of matching chars
-        listOfListsOfMatchingChars.append(listOfMatchingChars)      # so add to our list of lists of matching chars
+        # jika sampai proses di sini, list saat ini lolos uji sebagai "grup" atau "gugus" karakter yang cocok
+        listOfListsOfMatchingChars.append(listOfMatchingChars)      # jadi tambahkan ke dalam daftar karakter yang cocok
 
         listOfPossibleCharsWithCurrentMatchesRemoved = []
 
-                                                # remove the current list of matching chars from the big list so we don't use those same chars twice,
-                                                # make sure to make a new big list for this since we don't want to change the original big list
+        # hapus list karakter yang cocok saat ini dari list besar tidak digunakan karakter yang sama dua kali,
+        # pastikan untuk membuat list besar baru
         listOfPossibleCharsWithCurrentMatchesRemoved = list(set(listOfPossibleChars) - set(listOfMatchingChars))
 
-        recursiveListOfListsOfMatchingChars = findListOfListsOfMatchingChars(listOfPossibleCharsWithCurrentMatchesRemoved)      # recursive call
+        recursiveListOfListsOfMatchingChars = findListOfListsOfMatchingChars(listOfPossibleCharsWithCurrentMatchesRemoved)
 
-        for recursiveListOfMatchingChars in recursiveListOfListsOfMatchingChars:        # for each list of matching chars found by recursive call
-            listOfListsOfMatchingChars.append(recursiveListOfMatchingChars)             # add to our original list of lists of matching chars
+        for recursiveListOfMatchingChars in recursiveListOfListsOfMatchingChars:        # untuk setiap list karakter yang cocok ditemukan oleh panggilan rekursif
+            listOfListsOfMatchingChars.append(recursiveListOfMatchingChars)             # tambahkan ke list asli untuk list karakter yang cocok
         # end for
 
-        break       # exit for
+        break
 
     # end for
 
     return listOfListsOfMatchingChars
 # end function
 
-###################################################################################################
+
 def findListOfMatchingChars(possibleChar, listOfChars):
-            # the purpose of this function is, given a possible char and a big list of possible chars,
-            # find all chars in the big list that are a match for the single possible char, and return those matching chars as a list
+    # Tujuan dari fungsi ini adalah untuk menyimpan kemungkinan karakter dan lists
+    # Temukan semua karakter dalam z besar yang cocok dengan karakter tunggal yang mungkin, dan kembalikan karakter yang cocok sebagai daftar
     listOfMatchingChars = []                # this will be the return value
 
-    for possibleMatchingChar in listOfChars:                # for each char in big list
-        if possibleMatchingChar == possibleChar:    # if the char we attempting to find matches for is the exact same char as the char in the big list we are currently checking
-                                                    # then we should not include it in the list of matches b/c that would end up double including the current char
-            continue                                # so do not add to list of matches and jump back to top of for loop
+    for possibleMatchingChar in listOfChars:        # for each karakter in big list
+        if possibleMatchingChar == possibleChar:
+
+            continue
         # end if
-                    # compute stuff to see if chars are a match
+
         fltDistanceBetweenChars = distanceBetweenChars(possibleChar, possibleMatchingChar)
 
         fltAngleBetweenChars = angleBetweenChars(possibleChar, possibleMatchingChar)
@@ -318,22 +319,21 @@ def findListOfMatchingChars(possibleChar, listOfChars):
         fltChangeInWidth = float(abs(possibleMatchingChar.intBoundingRectWidth - possibleChar.intBoundingRectWidth)) / float(possibleChar.intBoundingRectWidth)
         fltChangeInHeight = float(abs(possibleMatchingChar.intBoundingRectHeight - possibleChar.intBoundingRectHeight)) / float(possibleChar.intBoundingRectHeight)
 
-                # check if chars match
+        # check jika karakter cocok
         if (fltDistanceBetweenChars < (possibleChar.fltDiagonalSize * MAX_DIAG_SIZE_MULTIPLE_AWAY) and
             fltAngleBetweenChars < MAX_ANGLE_BETWEEN_CHARS and
             fltChangeInArea < MAX_CHANGE_IN_AREA and
             fltChangeInWidth < MAX_CHANGE_IN_WIDTH and
             fltChangeInHeight < MAX_CHANGE_IN_HEIGHT):
 
-            listOfMatchingChars.append(possibleMatchingChar)        # if the chars are a match, add the current char to list of matching chars
+            listOfMatchingChars.append(possibleMatchingChar)        # jika karakter cocok tambahkan ke list kecocokan karakter
         # end if
     # end for
 
-    return listOfMatchingChars                  # return result
+    return listOfMatchingChars                  # return hasil dari kecocokan karakter
 # end function
 
-###################################################################################################
-# use Pythagorean theorem to calculate distance between two chars
+# gunakan theorema pythagoras untuk menghitung jarak 2 karakter
 def distanceBetweenChars(firstChar, secondChar):
     intX = abs(firstChar.intCenterX - secondChar.intCenterX)
     intY = abs(firstChar.intCenterY - secondChar.intCenterY)
@@ -341,44 +341,41 @@ def distanceBetweenChars(firstChar, secondChar):
     return math.sqrt((intX ** 2) + (intY ** 2))
 # end function
 
-###################################################################################################
-# use basic trigonometry (SOH CAH TOA) to calculate angle between chars
+# gunakan trigonometri dasar untuk menghitung sudut antar karakter
 def angleBetweenChars(firstChar, secondChar):
     fltAdj = float(abs(firstChar.intCenterX - secondChar.intCenterX))
     fltOpp = float(abs(firstChar.intCenterY - secondChar.intCenterY))
 
-    if fltAdj != 0.0:                           # check to make sure we do not divide by zero if the center X positions are equal, float division by zero will cause a crash in Python
-        fltAngleInRad = math.atan(fltOpp / fltAdj)      # if adjacent is not zero, calculate angle
+    if fltAdj != 0.0:                                   # periksa untuk memastikan bahwa tidak membagi dengan nol jika posisi pusat X sama, pembagian float dengan nol akan menyebabkan crash pada Python
+        fltAngleInRad = math.atan(fltOpp / fltAdj)      # hitung sudut
     else:
-        fltAngleInRad = 1.5708                          # if adjacent is zero, use this as the angle, this is to be consistent with the C++ version of this program
+        fltAngleInRad = 1.5708
     # end if
 
-    fltAngleInDeg = fltAngleInRad * (180.0 / math.pi)       # calculate angle in degrees
+    fltAngleInDeg = fltAngleInRad * (180.0 / math.pi)   # hitung sudut dalam derajat
 
     return fltAngleInDeg
 # end function
 
-###################################################################################################
-# if we have two chars overlapping or to close to each other to possibly be separate chars, remove the inner (smaller) char,
-# this is to prevent including the same char twice if two contours are found for the same char,
-# for example for the letter 'O' both the inner ring and the outer ring may be found as contours, but we should only include the char once
+# Jika memiliki dua karakter yang tumpang tindih atau untuk menutup satu sama lain untuk menjadi karakter yang terpisah, hapus karakter bagian dalam (lebih kecil),
+# ini untuk mencegah memasukkan karakter yang sama dua kali jika dua kontur ditemukan untuk karakter yang sama,
 def removeInnerOverlappingChars(listOfMatchingChars):
-    listOfMatchingCharsWithInnerCharRemoved = list(listOfMatchingChars)                # this will be the return value
+    listOfMatchingCharsWithInnerCharRemoved = list(listOfMatchingChars)                # mengembalikan nilai value
 
     for currentChar in listOfMatchingChars:
         for otherChar in listOfMatchingChars:
-            if currentChar != otherChar:        # if current char and other char are not the same char . . .
-                                                                            # if current char and other char have center points at almost the same location . . .
+            if currentChar != otherChar:                                    # jika kondisi karakter saat ini tidak sama dengan sebelumnya
+
+                # jika karakter saat ini dan lainnya memiliki titik tengah dan hampir sama
                 if distanceBetweenChars(currentChar, otherChar) < (currentChar.fltDiagonalSize * MIN_DIAG_SIZE_MULTIPLE_AWAY):
-                                # if we get in here we have found overlapping chars
-                                # next we identify which char is smaller, then if that char was not already removed on a previous pass, remove it
-                    if currentChar.intBoundingRectArea < otherChar.intBoundingRectArea:         # if current char is smaller than other char
-                        if currentChar in listOfMatchingCharsWithInnerCharRemoved:              # if current char was not already removed on a previous pass . . .
-                            listOfMatchingCharsWithInnerCharRemoved.remove(currentChar)         # then remove current char
+                    # Jika pada proses ini maka ditemukan karakter yang tumpang tindih
+                    if currentChar.intBoundingRectArea < otherChar.intBoundingRectArea:         # kondisi karakter saat ini lebih kecil dari yang lain
+                        if currentChar in listOfMatchingCharsWithInnerCharRemoved:              # jika karakter saat ini belum dihapus pada kondisi sebelumnya
+                            listOfMatchingCharsWithInnerCharRemoved.remove(currentChar)         # menghapus karakter sebelumnya
                         # end if
-                    else:                                                                       # else if other char is smaller than current char
-                        if otherChar in listOfMatchingCharsWithInnerCharRemoved:                # if other char was not already removed on a previous pass . . .
-                            listOfMatchingCharsWithInnerCharRemoved.remove(otherChar)           # then remove other char
+                    else:                                                                       # jika karakter lain lebih kecil dari karakter saat ini
+                        if otherChar in listOfMatchingCharsWithInnerCharRemoved:
+                            listOfMatchingCharsWithInnerCharRemoved.remove(otherChar)
                         # end if
                     # end if
                 # end if
@@ -389,40 +386,40 @@ def removeInnerOverlappingChars(listOfMatchingChars):
     return listOfMatchingCharsWithInnerCharRemoved
 # end function
 
-###################################################################################################
-# this is where we apply the actual char recognition
+
+# fungsi pengenalan karakter
 def recognizeCharsInPlate(imgThresh, listOfMatchingChars):
-    strChars = ""               # this will be the return value, the chars in the lic plate
+    strChars = ""               # mengembalikan value
 
     height, width = imgThresh.shape
 
     imgThreshColor = np.zeros((height, width, 3), np.uint8)
 
-    listOfMatchingChars.sort(key = lambda matchingChar: matchingChar.intCenterX)        # sort chars from left to right
+    listOfMatchingChars.sort(key = lambda matchingChar: matchingChar.intCenterX)        # mengurutkan karakter dari kiri ke kanan
 
-    cv2.cvtColor(imgThresh, cv2.COLOR_GRAY2BGR, imgThreshColor)                     # make color version of threshold image so we can draw contours in color on it
+    cv2.cvtColor(imgThresh, cv2.COLOR_GRAY2BGR, imgThreshColor)                         # gunakan warna threshold dan gray agar dapat membentuk kontur
 
-    for currentChar in listOfMatchingChars:                                         # for each char in plate
+    for currentChar in listOfMatchingChars:                                             # for each karakter pada plat
         pt1 = (currentChar.intBoundingRectX, currentChar.intBoundingRectY)
         pt2 = ((currentChar.intBoundingRectX + currentChar.intBoundingRectWidth), (currentChar.intBoundingRectY + currentChar.intBoundingRectHeight))
 
-        cv2.rectangle(imgThreshColor, pt1, pt2, Main_Deteksi_Plate.SCALAR_GREEN, 2)           # draw green box around the char
+        cv2.rectangle(imgThreshColor, pt1, pt2, Main_Deteksi_Plate.SCALAR_GREEN, 2)     # membuat green box pada sekitar karakter
 
-                # crop char out of threshold image
-        imgROI = imgThresh[currentChar.intBoundingRectY : currentChar.intBoundingRectY + currentChar.intBoundingRectHeight,
-                           currentChar.intBoundingRectX : currentChar.intBoundingRectX + currentChar.intBoundingRectWidth]
+        # crop gambar dari threshold
+        imgROI = imgThresh[currentChar.intBoundingRectY: currentChar.intBoundingRectY + currentChar.intBoundingRectHeight,
+                           currentChar.intBoundingRectX: currentChar.intBoundingRectX + currentChar.intBoundingRectWidth]
 
-        imgROIResized = cv2.resize(imgROI, (RESIZED_CHAR_IMAGE_WIDTH, RESIZED_CHAR_IMAGE_HEIGHT))           # resize image, this is necessary for char recognition
+        imgROIResized = cv2.resize(imgROI, (RESIZED_CHAR_IMAGE_WIDTH, RESIZED_CHAR_IMAGE_HEIGHT))               # resize gambar, diperlukan untuk pengenalan karakter
 
-        npaROIResized = imgROIResized.reshape((1, RESIZED_CHAR_IMAGE_WIDTH * RESIZED_CHAR_IMAGE_HEIGHT))        # flatten image into 1d numpy array
+        npaROIResized = imgROIResized.reshape((1, RESIZED_CHAR_IMAGE_WIDTH * RESIZED_CHAR_IMAGE_HEIGHT))        # flatten image pada numpy array 1d
 
-        npaROIResized = np.float32(npaROIResized)               # convert from 1d numpy array of ints to 1d numpy array of floats
+        npaROIResized = np.float32(npaROIResized)                                                               # konversi dari 1d numpy array dari integer ke 1d numpy array dari floats
 
-        retval, npaResults, neigh_resp, dists = kNearest.findNearest(npaROIResized, k = 1)              # finally we can call findNearest !!!
+        retval, npaResults, neigh_resp, dists = kNearest.findNearest(npaROIResized, k = 1)                      # panggil kembali fungsi findNearest !!!
 
-        strCurrentChar = str(chr(int(npaResults[0][0])))            # get character from results
+        strCurrentChar = str(chr(int(npaResults[0][0])))                                                        # dapatkan karakter dari hasil
 
-        strChars = strChars + strCurrentChar                        # append current char to full string
+        strChars = strChars + strCurrentChar                                                                    # gabungkan semua karakter
 
     # end for
 
@@ -432,11 +429,3 @@ def recognizeCharsInPlate(imgThresh, listOfMatchingChars):
 
     return strChars
 # end function
-
-
-
-
-
-
-
-
