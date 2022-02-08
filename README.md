@@ -1,4 +1,4 @@
-## pengenalan_plat_nomor_otomatis
+## Implementasi KNN Algorithm for solving character recognition
  pengenalan plat nomor otomatis dengan python 3.7.5 dan OpenCv 4
 ## requirements
 1. Install Python 3.7.5
